@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# WebApi
+
+## build results
+[Bb]in/
+[Oo]bj/
+
+#App.Development.json
+**/[Aa]ppsettings.[Dd]evelopment.json

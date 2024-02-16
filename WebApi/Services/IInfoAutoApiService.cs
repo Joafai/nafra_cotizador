@@ -1,7 +1,12 @@
+using DTOs.InfoAutoApiService;
+
 namespace Services;
 
 public interface IInfoAutoApiService
 {
-    Task<BrandRes[]> GetBrandsAsync();
-    Task<BrandModelRes[]> GetBrandsModelsAsync(uint brandId);
+
+    Task LoginAsync();
+    Task RefreshAsync();
+    Task<BrandRes[]> GetBrandsAsync(uint page = 1, uint pageSize = 30);
+    Task<BrandModelRes[]> GetBrandsModelsAsync(uint brandId, uint page = 1, uint pageSize = 30);
 }

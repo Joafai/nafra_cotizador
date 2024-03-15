@@ -1,4 +1,3 @@
-import { FetchClient } from "./FetchClient";
 import { useUserStore } from "../stores/UserStore";
 
 export type LoginRes = {
@@ -54,60 +53,98 @@ const state = useUserStore.getState();
 
 export default class InfoAutoService {
 
-    static login = async (): Promise<void> => {
+    static login = async(): Promise<void> => {
 
         const headers = new Headers();
-        headers.append( "Authorization", `Basic ${process.env.INFO_AUTO_USER}:${process.env.INFO_AUTO_PASSWORD}`);
+        headers.set('Authorization', 'Basic ' + btoa("matacarlos@nafra.com.ar:ZF6WOhUFsJCKOBKK"));
 
-        const response = await FetchClient.post<LoginRes>({
-            request: {
-                url: `${process.env.INFO_AUTO_API_URL}/cars/auth/login`,
-                headers: headers,
-            },
+        const response = await fetch(`api/cars/auth/login`,
+        {
+            headers: headers,
+            method: "POST",
         });
 
+        console.log(response);
+        console.log(await response.text());
+
+        let responseBody;
+
+        // Prevent parsing errors when the response body is empty
+        try {
+            responseBody = await response.json()
+        } catch (error) {
+            responseBody = {};
+        }
+
         state.setSession({
-            infoAutoAccessToken: response.access_token,
-            infoAutoRefreshToken: response.refresh_token,
+            infoAutoAccessToken: responseBody.access_token,
+            infoAutoRefreshToken: responseBody.refresh_token,
         });
     };
 
-    static refresh_token = async (): Promise<void> => {
+    static refresh_token = async (): Promise<string> => {
+
+        const responsea = await fetch(`api/a/testTest`);
+        console.log(responsea);
 
         const headers = new Headers();
-        headers.append( "Authorization", `Bearer ${state.session?.infoAutoRefreshToken}`);
+        headers.append( "Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDUzNjQzNiwianRpIjoiMWQxYTA1MjctMjY0NC00MjY4LTljYjYtZTE3ZGMwNmNmZjk0IiwidHlwZSI6InJlZnJlc2giLCJpZGVudGl0eSI6Mzg5LCJuYmYiOjE3MTA1MzY0MzYsImNzcmYiOiI0OWY0YWJjZS1iNDBkLTQwYTgtYmU2Ni1kNWY0YjdjNGUwZjYiLCJleHAiOjE3MTA2MjI4MzYsInJvbGVzIjpbeyJpZCI6MTksIm5hbWUiOiJEZXNhcnJvbGxvIn0seyJpZCI6MTAsIm5hbWUiOiJFeHRyYXMifSx7ImlkIjo5LCJuYW1lIjoiTW9kZWxvcyJ9XX0.fgi630gZgISUkMu6OjLj2NA_k9HCqaR6xYdRvE8Csqg`);
 
-        const response = await FetchClient.post<LoginRes>({
-            request: {
-                url: `${process.env.INFO_AUTO_API_URL}/cars/auth/refresh`,
-                headers: headers,
-            },
+        const response = await fetch(`api/testTest`, 
+        {
+            headers: headers,
+            method: "GET",
         });
+
+        let responseBody;
+
+        // Prevent parsing errors when the response body is empty
+        try {
+            responseBody = await response.json()
+        } catch (error) {
+            responseBody = {};
+        }
 
         state.setSession({
-            infoAutoAccessToken: response.access_token,
-            infoAutoRefreshToken: state.session?.infoAutoRefreshToken,
+            infoAutoAccessToken: responseBody.access_token,
         });
+
+        return responseBody.access_token;
     };
 
     static getBrands = async (
+        bearer: string,
         queryString?: string,
         page: number = 1,
         pageSize: number = 20
     ): Promise<BrandRes[]> => {
 
-        let url = `${process.env.INFO_AUTO_API_URL}/cars/pub/brands/?&page=${page}&pageSize=${pageSize}`;
+        console.log(bearer);
+
+        let url = `api/cars/pub/brands/?&page=${page}&pageSize=${pageSize}`;
 
         if (queryString)
             url += `&queryString=${queryString}`;
 
-        const response = await FetchClient.get<BrandRes[]>({
-            request: {
-                url: url,
-            },
+        const headers = new Headers();
+        headers.append( "Authorization", `Bearer ${bearer}`);
+
+        const response = await fetch(url, {
+            headers: headers,
         });
 
-        return response;
+        console.log(await response.text());
+
+        let responseBody;
+
+        // Prevent parsing errors when the response body is empty
+        try {
+            responseBody = await response.json()
+        } catch (error) {
+            responseBody = {};
+        }
+
+        return responseBody;
     };
 
     static getGroups = async (
@@ -126,13 +163,23 @@ export default class InfoAutoService {
         if (prices_to)
             url += `&prices_to=${prices_to}`;
 
-        const response = await FetchClient.get<GroupRes[]>({
-            request: {
-                url: url,
-            },
+        const headers = new Headers();
+        headers.set('Authorization', 'Bearer ' + state.session?.infoAutoAccessToken);
+
+        const response = await fetch(url, {
+            headers: headers,
         });
 
-        return response;
+        let responseBody;
+
+        // Prevent parsing errors when the response body is empty
+        try {
+            responseBody = await response.json()
+        } catch (error) {
+            responseBody = {};
+        }
+
+        return responseBody;
     };
 
     static getModels = async (
@@ -152,13 +199,23 @@ export default class InfoAutoService {
         if (prices_to)
             url += `&prices_to=${prices_to}`;
 
-        const response = await FetchClient.get<ModelRes[]>({
-            request: {
-                url: url,
-            },
+        const headers = new Headers();
+        headers.set('Authorization', 'Bearer ' + state.session?.infoAutoAccessToken);
+
+        const response = await fetch(url, {
+            headers: headers,
         });
 
-        return response;
+        let responseBody;
+
+        // Prevent parsing errors when the response body is empty
+        try {
+            responseBody = await response.json()
+        } catch (error) {
+            responseBody = {};
+        }
+
+        return responseBody;
     };
 }
 

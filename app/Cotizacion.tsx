@@ -1,6 +1,35 @@
 "use client";
 
+import InfoAutoService from "@/services/InfoAutoService";
 import TarjetaSeguro from "./components/TarjetaSeguro";
+import handler from "@/api/testTest";
+
+// InfoAutoService.login()
+//     .then(() => {
+//             InfoAutoService.refresh_token()
+//             .then((bearer) => {
+//                     InfoAutoService.getBrands(bearer, "vol").then( (brandRes) => {
+//                             console.log(brandRes);
+//                             });
+//                     });
+//             });
+
+// export const testtest = async () => {
+//     const headers = new Headers();
+//     headers.set('Authorization', 'Basic ' + btoa("matacarlos@nafra.com.ar:ZF7WOhUFsJCKOBKK"));
+// 
+//     const response = await fetch(`api/cars/auth/login`,
+//                                  {
+//         headers: headers,
+//         method: "POST",
+//     });
+// 
+//     console.log(response.text());
+//     return {
+//         props: {a : response.text()}
+//     }
+// }
+handler().then((data) => {console.clear(); console.log(data);});
 
 export default function Cotizacion() {
   return (

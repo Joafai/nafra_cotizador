@@ -3,28 +3,29 @@
 import { useState } from "react";
 import InfoAutoService from "@/api/InfoAutoService";
 import TarjetaSeguro from "./components/TarjetaSeguro";
+import CotizadorService from "@/api/CotizadorService";
 
 
-InfoAutoService.login()
-    .then(() => {
-            InfoAutoService.refresh_token().then(() => {
-                    InfoAutoService.getBrands().then((brands) => {
-                            console.log(brands);
-                            new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
-                                    InfoAutoService.getGroups(46, 2023,2023).then((groups) => {
-                                            console.clear();
-                                            console.log(groups);
-                                            new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
-                                                    InfoAutoService.getModels(46, 39, 2023,2023).then((models) => {
-                                                            console.clear();
-                                                            console.log(models);
-                                                            });
-                                                    });
-                                            });
-                                    });
-                            });
-                    });
-            });
+// InfoAutoService.login()
+//     .then(() => {
+//             InfoAutoService.refresh_token().then(() => {
+//                     InfoAutoService.getBrands().then((brands) => {
+//                             console.log(brands);
+//                             new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+//                                     InfoAutoService.getGroups(46, 2023,2023).then((groups) => {
+//                                             console.clear();
+//                                             console.log(groups);
+//                                             new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+//                                                     InfoAutoService.getModels(46, 39, 2023,2023).then((models) => {
+//                                                             console.clear();
+//                                                             console.log(models);
+//                                                             });
+//                                                     });
+//                                             });
+//                                     });
+//                             });
+//                     });
+//             });
 
 export default function Cotizacion() {
   const [showResponsabilidadCivil, setShowResponsabilidadCivil] =
@@ -38,6 +39,9 @@ export default function Cotizacion() {
   const toggleShowTerceros = () => {
     setShowTerceros(!showTerceros);
   };
+
+CotizadorService.login();
+console.log("ba");
 
   return (
     <div>

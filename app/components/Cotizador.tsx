@@ -4,10 +4,20 @@ import { z } from "zod";
 // import { zodResolver } from "@hookform/resolver/zod";
 import { Form, useForm } from "react-hook-form";
 import { GetServerSideProps } from "next";
+import CotizadorService from "@/api/CotizadorService";
+import InfoAutoService from "@/api/InfoAutoService";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
 };
+
+InfoAutoService.login().then(() => {
+    InfoAutoService.getBrands().then((res) => {
+        console.clear();
+        console.log(res);
+    });
+});
+//CotizadorService.login();
 
 const Cotizador: React.FC = () => {
   const [isCheckedGNC, setIsCheckedGNC] = useState(false);

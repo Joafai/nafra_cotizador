@@ -52,7 +52,7 @@ export type InfoAutoSession = {
   infoAutoRefreshToken?: string;
 };
 
-const session: Session = { infoAutoAccessToken: undefined, infoAutoRefreshToken: undefined };
+const session: InfoAutoSession = { infoAutoAccessToken: undefined, infoAutoRefreshToken: undefined };
 
 export default class InfoAutoService {
 
@@ -109,6 +109,8 @@ export default class InfoAutoService {
         pageSize: number = 20
     ): Promise<BrandRes[]> => {
 
+        this.refresh_token();
+
         let url = `https://api.infoauto.com.ar/cars/pub/brands/?&page=${page}&pageSize=${pageSize}`;
 
         if (queryString)
@@ -140,6 +142,8 @@ export default class InfoAutoService {
         page: number = 1,
         pageSize: number = 20
     ): Promise<GroupRes[]> => {
+
+        this.refresh_token();
 
         let url = `https://api.infoauto.com.ar/cars/pub/brands/${brand_id}/groups/?&page=${page}&pageSize=${pageSize}`;
 
@@ -176,6 +180,8 @@ export default class InfoAutoService {
         page: number = 1,
         pageSize: number = 20
     ): Promise<ModelRes[]> => {
+
+        this.refresh_token();
 
         let url = `https://api.infoauto.com.ar/cars/pub/brands/${brand_id}/groups/${group_id}/models/?&page=${page}&pageSize=${pageSize}`;
 

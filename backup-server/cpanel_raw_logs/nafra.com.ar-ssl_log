@@ -1,0 +1,4 @@
+138.246.253.24 - - [10/Dec/2020:09:34:48 -0300] "HEAD / HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.85 Safari/537.36"
+114.119.154.135 - - [10/Dec/2020:11:21:27 -0300] "GET /robots.txt HTTP/1.1" 404 - "-" "(compatible;PetalBot;+https://aspiegel.com/petalbot)"
+78.138.117.190 - - [10/Dec/2020:11:35:55 -0300] "GET /robots.txt HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; XoviOnpageCrawler; +http://www.xovi.de/)"
+78.138.117.190 - - [10/Dec/2020:11:35:55 -0300] "GET / HTTP/1.1" 404 - "-" "Mozilla/5.0 (compatible; XoviOnpageCrawler; +http://www.xovi.de/)"

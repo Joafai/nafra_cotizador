@@ -1,0 +1,1 @@
+[13-Oct-2020 12:55:46 UTC] PHP Fatal error:  Class 'SMTP' not found in /home/nafracom/public_html/sendMail.php on line 15

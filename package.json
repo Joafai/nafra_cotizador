@@ -2,6 +2,7 @@
   "name": "nafra_cotizador",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://api.infoauto.com.ar",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

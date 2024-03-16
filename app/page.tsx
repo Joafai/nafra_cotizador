@@ -13,12 +13,12 @@ export default function Home() {
     <main>
       <div className="bg-white h-screen">
         <Header></Header>
-        {/* <Cotizador></Cotizador> */}
+        <Cotizador></Cotizador>
         {/* <AtencionAlCliente></AtencionAlCliente> */}
         {/* <DenunciaDeSiniestro></DenunciaDeSiniestro> */}
-        <Cotizacion></Cotizacion>
+        {/* <Cotizacion></Cotizacion> */}
       </div>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </main>
   );
 }

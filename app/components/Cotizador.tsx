@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import nafra from "../assets/nafra3.jpeg";
+import { z } from "zod";
+// import { zodResolver } from "@hookform/resolver/zod";
+import { Form, useForm } from "react-hook-form";
+import { GetServerSideProps } from "next";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return { props: {} };
+};
 
 const Cotizador: React.FC = () => {
   const [isCheckedGNC, setIsCheckedGNC] = useState(false);
@@ -138,6 +146,35 @@ const Cotizador: React.FC = () => {
     setBorderColor(newBorderColor);
   };
 
+  const validationSchema = z.object({
+    brand: z.string({ required_error: "El campo es requierido" }),
+    year: z.string({ required_error: "El campo es requierido" }),
+    model: z.string({ required_error: "El campo es requierido" }),
+    version: z.string({ required_error: "El campo es requierido" }),
+    gnc: z.boolean(),
+    postalCode: z.number(),
+    age: z.number(),
+    genre: z.boolean(),
+  });
+
+  type ValidationSchema = z.infer<typeof validationSchema>;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<ValidationSchema>({
+    // resolver: zodResolver(validationSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data, event) => {
+    event?.preventDefault();
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   return (
     <div className="bg-white h-screen-full">
       <div className="flex gap-2 p-12 pb-2">
@@ -155,6 +192,7 @@ const Cotizador: React.FC = () => {
           Resultado
         </h4>
       </div>
+      {/* <Form> */}
       <div
         onClick={() => handleClick(0)}
         className={`flex gap-24 mx-12 p-8 px-32 rounded-lg border-l-4 ${borderColor[0]} ${colors[0]}`}
@@ -295,6 +333,7 @@ const Cotizador: React.FC = () => {
           Comparar
         </button>
       </div>
+      {/* </Form> */}
     </div>
   );
 };

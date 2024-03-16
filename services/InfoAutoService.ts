@@ -82,18 +82,15 @@ export default class InfoAutoService {
         });
     };
 
-    static refresh_token = async (): Promise<string> => {
-
-        const responsea = await fetch(`api/a/testTest`);
-        console.log(responsea);
+    static refresh_token = async (refresh_token: string): Promise<string> => {
 
         const headers = new Headers();
-        headers.append( "Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDUzNjQzNiwianRpIjoiMWQxYTA1MjctMjY0NC00MjY4LTljYjYtZTE3ZGMwNmNmZjk0IiwidHlwZSI6InJlZnJlc2giLCJpZGVudGl0eSI6Mzg5LCJuYmYiOjE3MTA1MzY0MzYsImNzcmYiOiI0OWY0YWJjZS1iNDBkLTQwYTgtYmU2Ni1kNWY0YjdjNGUwZjYiLCJleHAiOjE3MTA2MjI4MzYsInJvbGVzIjpbeyJpZCI6MTksIm5hbWUiOiJEZXNhcnJvbGxvIn0seyJpZCI6MTAsIm5hbWUiOiJFeHRyYXMifSx7ImlkIjo5LCJuYW1lIjoiTW9kZWxvcyJ9XX0.fgi630gZgISUkMu6OjLj2NA_k9HCqaR6xYdRvE8Csqg`);
+        headers.append( "Authorization", `Bearer ${refresh_token}`);
 
-        const response = await fetch(`api/testTest`, 
+        const response = await fetch(`api/cars/auth/refresh`, 
         {
             headers: headers,
-            method: "GET",
+            method: "POST",
         });
 
         let responseBody;

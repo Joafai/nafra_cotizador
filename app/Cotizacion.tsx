@@ -1,8 +1,7 @@
 "use client";
 
-import InfoAutoService from "@/services/InfoAutoService";
+import InfoAutoService from "@/api/InfoAutoService";
 import TarjetaSeguro from "./components/TarjetaSeguro";
-import handler from "@/api/testTest";
 
 // InfoAutoService.login()
 //     .then(() => {
@@ -29,7 +28,28 @@ import handler from "@/api/testTest";
 //         props: {a : response.text()}
 //     }
 // }
-handler().then((data) => {console.clear(); console.log(data);});
+//handler("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxMDUzNjQzNiwianRpIjoiMWQxYTA1MjctMjY0NC00MjY4LTljYjYtZTE3ZGMwNmNmZjk0IiwidHlwZSI6InJlZnJlc2giLCJpZGVudGl0eSI6Mzg5LCJuYmYiOjE3MTA1MzY0MzYsImNzcmYiOiI0OWY0YWJjZS1iNDBkLTQwYTgtYmU2Ni1kNWY0YjdjNGUwZjYiLCJleHAiOjE3MTA2MjI4MzYsInJvbGVzIjpbeyJpZCI6MTksIm5hbWUiOiJEZXNhcnJvbGxvIn0seyJpZCI6MTAsIm5hbWUiOiJFeHRyYXMifSx7ImlkIjo5LCJuYW1lIjoiTW9kZWxvcyJ9XX0.fgi630gZgISUkMu6OjLj2NA_k9HCqaR6xYdRvE8Csqg").then((data) => {console.clear(); console.log(data);});
+
+//InfoAutoService.login()
+//    .then(() => {
+//            InfoAutoService.refresh_token().then(() => {
+//                    InfoAutoService.getBrands().then((brands) => {
+//                            console.log(brands);
+//                            new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+//                                    InfoAutoService.getGroups(46, 2023,2023).then((groups) => {
+//                                            console.clear();
+//                                            console.log(groups);
+//                                            new Promise((resolve) => setTimeout(resolve, 2000)).then(() => {
+//                                                    InfoAutoService.getModels(46, 39, 2023,2023).then((models) => {
+//                                                            console.clear();
+//                                                            console.log(models);
+//                                                            });
+//                                                    });
+//                                            });
+//                                    });
+//                            });
+//                    });
+//            });
 
 export default function Cotizacion() {
   return (

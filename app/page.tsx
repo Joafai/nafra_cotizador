@@ -17,8 +17,8 @@ export default function Home() {
         {/* <AtencionAlCliente></AtencionAlCliente> */}
         {/* <DenunciaDeSiniestro></DenunciaDeSiniestro> */}
         {/* <Cotizacion></Cotizacion> */}
+        <Footer></Footer>
       </div>
-      <Footer></Footer>
     </main>
   );
 }

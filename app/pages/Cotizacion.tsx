@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import TarjetaSeguro from "./components/TarjetaSeguro";
+import TarjetaSeguro from "../components/TarjetaSeguro";
 
 export default function Cotizacion() {
   const [showResponsabilidadCivil, setShowResponsabilidadCivil] =

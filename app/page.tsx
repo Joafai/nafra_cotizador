@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Cotizador from "./components/Cotizador";
-import AtencionAlCliente from "./AtencionAlCliente";
-import Cotizacion from "./Cotizacion";
-import DenunciaDeSiniestro from "./DenunciaDeSinestro";
+import Cotizador from "./pages/Cotizador";
+import AtencionAlCliente from "./pages/AtencionAlCliente";
+import Cotizacion from "./pages/Cotizacion";
+import DenunciaDeSiniestro from "./pages/DenunciaDeSinestro";
 
 export default function Home() {
   return (

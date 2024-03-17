@@ -4,13 +4,13 @@ import { z } from "zod";
 // import { zodResolver } from "@hookform/resolver/zod";
 import { Form, useForm } from "react-hook-form";
 import { GetServerSideProps } from "next";
-import { Select } from "./Select";
+import { Select } from "../components/Select";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
 };
 
-const Cotizador: React.FC = () => {
+const Cotizador = () => {
   const [isCheckedGNC, setIsCheckedGNC] = useState(false);
   const [isCheckedSex, setIsCheckedSex] = useState(false);
   const [isKmChecked, setIsKmChecked] = useState(false);
@@ -34,6 +34,9 @@ const Cotizador: React.FC = () => {
 
   const [showCarHelper, setShowCarHelper] = useState<boolean>(false);
   const [show0KmHelper, setShow0KmHelper] = useState<boolean>(false);
+  const [showPostalCodeHelper, setShowPostalCodeHelper] =
+    useState<boolean>(false);
+  const [showAgeHelper, setShowAgeHelper] = useState<boolean>(false);
 
   const modelosVolkswagen = [
     "Amarok",
@@ -101,10 +104,22 @@ const Cotizador: React.FC = () => {
       setShowCarHelper(false);
     }
 
-    if (index === 2 || index === 3) {
+    if (index === 2) {
       setShow0KmHelper(true);
-    } else {
+    } else if (index !== 2 && index !== 3) {
       setShow0KmHelper(false);
+    }
+
+    if (index === 4) {
+      setShowPostalCodeHelper(true);
+    } else {
+      setShowPostalCodeHelper(false);
+    }
+
+    if (index === 5) {
+      setShowAgeHelper(true);
+    } else {
+      setShowAgeHelper(false);
     }
   };
 
@@ -140,8 +155,8 @@ const Cotizador: React.FC = () => {
   return (
     <div className="bg-white h-screen-full">
       <div className="flex gap-2 p-12 pb-2">
-        <h1 className="text-2xl text-gray-900 font-bold mb-4">Compara</h1>
-        <h1 className="text-2xl text-[#184c94] font-bold mb-4">
+        <h1 className="text-3xl text-gray-900 font-bold mb-4">Compará</h1>
+        <h1 className="text-3xl text-[#184c94] font-bold mb-4">
           Seguros de Autos
         </h1>
       </div>
@@ -334,6 +349,64 @@ const Cotizador: React.FC = () => {
             </p>
           </div>
           <div
+            className={`custom-shape bg-green-500 bg-opacity-70 text-gray-700 rounded-lg`}
+            style={{
+              position: "absolute",
+              top: 555,
+              right: 120,
+              width: "450px",
+              height: "130px",
+              zIndex: 9999,
+              padding: 9,
+              opacity: showPostalCodeHelper ? 1 : 0,
+              transition: "opacity 0.5s ease-in-out",
+            }}
+          >
+            <h2
+              className="text-lg font-bold"
+              style={{ textAlign: "justify", padding: "5px" }}
+            >
+              Código postal
+            </h2>
+
+            <p style={{ textAlign: "justify", padding: "5px" }}>
+              Tenés que ingresar el código postal del domicilio en donde el auto
+              duerme todas las noches. Ej: 1001
+            </p>
+          </div>
+          <div
+            className={`custom-shape bg-green-500 bg-opacity-70 text-gray-700 rounded-lg`}
+            style={{
+              position: "absolute",
+              top: 715,
+              right: 120,
+              width: "450px",
+              height: "178px",
+              zIndex: 9999,
+              padding: 9,
+              opacity: showAgeHelper ? 1 : 0,
+              transition: "opacity 0.5s ease-in-out",
+            }}
+          >
+            <h2
+              className="text-lg font-bold"
+              style={{ textAlign: "justify", padding: "5px" }}
+            >
+              Edad - Género
+            </h2>
+            <h2
+              className="text-lg "
+              style={{ textAlign: "justify", padding: "5px" }}
+            >
+              ¿Por qué me preguntan la edad y el género?
+            </h2>
+
+            <p style={{ textAlign: "justify", padding: "5px" }}>
+              Te pedimos esta información ya que los precios de los seguros
+              pueden variar según la edad y sexo de la persona.
+            </p>
+          </div>
+          <div
             onClick={() => handleClick(4)}
             className={`flex gap-2 mx-12 p-8 px-32 flex-col rounded-lg border-l-4 ${borderColor[4]} ${colors[4]}`}
           >
@@ -393,8 +466,10 @@ const Cotizador: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={`flex gap-2 flex-col rounded-lg bg-white`}>
-          <button className="flex float-end self-end bg-green-400 hover:bg-green-500 my-8 mr-12 p-1 px-20 text-gray-700 rounded-lg">
+        <div
+          className={`flex gap-2 flex-col justify-center rounded-lg bg-white`}
+        >
+          <button className="flex float-start self-end text-lg bg-green-400 hover:bg-green-500 my-8 mr-12 p-1 px-20 text-gray-700 rounded-lg">
             Comparar
           </button>
         </div>

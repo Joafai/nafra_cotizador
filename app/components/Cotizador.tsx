@@ -1,23 +1,64 @@
 import React, { useState } from "react";
 import nafra from "../assets/nafra3.jpeg";
 import { z } from "zod";
-// import { zodResolver } from "@hookform/resolver/zod";
 import { Form, useForm } from "react-hook-form";
 import { GetServerSideProps } from "next";
-import CotizadorService from "@/api/CotizadorService";
 import InfoAutoService from "@/api/InfoAutoService";
+import AdminseService, { AllianzCotizadorReq as AllianzCotizadorReq } from "@/api/AdminseService";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
 };
 
-InfoAutoService.login().then(() => {
-    InfoAutoService.getBrands().then((res) => {
-        console.clear();
+// InfoAutoService.login().then(() => {
+//     InfoAutoService.getBrands().then((res) => {
+//         console.clear();
+//         console.log(res);
+//     });
+// });
+
+// AdminseService.getProvincias()
+//     .then((provincias) => {
+//         console.clear();
+//         console.log(provincias);
+//     });
+
+// AdminseService.login()
+//     .then((res) => {
+//     });
+
+const allianzCotizadorReq: AllianzCotizadorReq = {
+    cotizadorReq : {
+        infoautoAnio: 2023,
+        infoautoId: 460862,
+        cia: 'allianz',
+        codigoPostal: '1120',
+        es0km: 0,
+        fechaNacimiento: '1990-01-01',
+        isMoto: 0,
+        origen: 'mata',
+        sexo: 'MALE',
+        producerProfileId: 7462,
+        producerId: 882
+    },
+    allianzClausulaAjuste: 20,
+    allianzGranizo: 1,
+    allianzMediopago: 'T',
+    allianzPeriodo: 'S',
+    allianzTieneAlarma: 0,
+    clientDni: '11111111',
+    clientTipoDoc: 'dni',
+    codigoCia: '0036',
+    provincia: 2,
+    sumaAsegurada: 0,
+    tipoUso: 1,
+    value: 'allianz',
+};
+
+AdminseService.allianzCotizar(allianzCotizadorReq)
+    .then((res) => {
         console.log(res);
     });
-});
-//CotizadorService.login();
 
 const Cotizador: React.FC = () => {
   const [isCheckedGNC, setIsCheckedGNC] = useState(false);

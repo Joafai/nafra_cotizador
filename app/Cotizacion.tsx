@@ -3,7 +3,7 @@
 import { useState } from "react";
 import InfoAutoService from "@/api/InfoAutoService";
 import TarjetaSeguro from "./components/TarjetaSeguro";
-import CotizadorService from "@/api/CotizadorService";
+import AdminseService from "@/api/AdminseService";
 
 
 // InfoAutoService.login()
@@ -39,9 +39,6 @@ export default function Cotizacion() {
   const toggleShowTerceros = () => {
     setShowTerceros(!showTerceros);
   };
-
-CotizadorService.login();
-console.log("ba");
 
   return (
     <div>

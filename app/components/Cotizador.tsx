@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Form, useForm } from "react-hook-form";
 import { GetServerSideProps } from "next";
 import InfoAutoService from "@/api/InfoAutoService";
-import AdminseService, { AllianzCotizadorReq , GalenoCotizadorReq , SancrisCotizadorReq} from "@/api/AdminseService";
+import AdminseService, { AllianzCotizadorReq , GalenoCotizadorReq , SancrisCotizadorReq, MercantilCotizadorReq} from "@/api/AdminseService";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -94,40 +94,75 @@ export const getServerSideProps: GetServerSideProps = async () => {
 //         console.log(res.cotizaciones[0]);
 //     });
 
-const sancrisCotizadorReq: SancrisCotizadorReq = {
-    cotizadorReq : {
-        infoautoAnio: 2023,
-        infoautoId: 460862,
-        cia: 'sancris',
-        codigoPostal: '1120',
-        es0km: 0,
-        fechaNacimiento: '1990-01-01',
-        isMoto: 0,
-        origen: 'mata',
-        sexo: 'FEMALE',
-        producerProfileId: 9771,
-        producerId: 882
-    },
-    clientDni: "21013839",
-    clientTipoDoc: "dni",
-    provincia: 2,
-    sancrisClausula: 20,
-    sancrisCuotas: 6,
-    sancrisDescuento: 0,
-    sancrisForma_pago: 'creditcard',
-    sancrisGnc: 0,
-    sancrisGps: 0,
-    sancrisPeriodo: 'HalfYear',
-    sancrisSaAcc: 0,
-    sancrisTipoContratacion: 'CA7_Traditional',
-    sancrisTipoDocumento: 'Ext_DNI96',
-};
+// const sancrisCotizadorReq: SancrisCotizadorReq = {
+//     cotizadorReq : {
+//         infoautoAnio: 2023,
+//         infoautoId: 460862,
+//         cia: 'sancris',
+//         codigoPostal: '1120',
+//         es0km: 0,
+//         fechaNacimiento: '1990-01-01',
+//         isMoto: 0,
+//         origen: 'mata',
+//         sexo: 'FEMALE',
+//         producerProfileId: 9771,
+//         producerId: 882
+//     },
+//     clientDni: "21013839",
+//     clientTipoDoc: "dni",
+//     provincia: 2,
+//     sancrisClausula: 20,
+//     sancrisCuotas: 6,
+//     sancrisDescuento: 0,
+//     sancrisForma_pago: 'creditcard',
+//     sancrisGnc: 0,
+//     sancrisGps: 0,
+//     sancrisPeriodo: 'HalfYear',
+//     sancrisSaAcc: 0,
+//     sancrisTipoContratacion: 'CA7_Traditional',
+//     sancrisTipoDocumento: 'Ext_DNI96',
+// };
+// 
+// AdminseService.sancrisCotizador(sancrisCotizadorReq)
+//     .then((res) => {
+//         console.log(res);
+//         console.log(res.cotizaciones[0]);
+//     });
 
-AdminseService.sancrisCotizador(sancrisCotizadorReq)
-    .then((res) => {
-        console.log(res);
-        console.log(res.cotizaciones[0]);
-    });
+// const mercantilCotizadorReq: MercantilCotizadorReq = {
+//     cotizadorReq : {
+//         infoautoAnio: 2023,
+//         infoautoId: 460862,
+//         cia: 'mercantil',
+//         codigoPostal: '1120',
+//         es0km: 0,
+//         fechaNacimiento: '1990-01-01',
+//         isMoto: 0,
+//         origen: 'mata',
+//         sexo: 'FEMALE',
+//         producerProfileId: 7463,
+//         producerId: 882
+//     },
+//     clientDni: "21013839",
+//     clientTipoDoc: "dni",
+//     provincia: 2,
+//     mercantilLocalidad: 131228,
+//     mercantilAjuste: 0,
+//     mercantilBonificacion: 0,
+//     mercantilComision: 20,
+//     mercantilFormapago: 'C',
+//     mercantilGnc: 'N',
+//     mercantilIva: 5,
+//     mercantilPeriodo: 4,
+//     mercantilRastreo: 0,
+// };
+// 
+// AdminseService.mercantilCotizador(mercantilCotizadorReq)
+//     .then((res) => {
+//         console.log(res);
+//         console.log(res.cotizaciones[0]);
+//     });
+
 
 const Cotizador: React.FC = () => {
   const [isCheckedGNC, setIsCheckedGNC] = useState(false);

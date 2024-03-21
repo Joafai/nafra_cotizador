@@ -143,6 +143,23 @@ export type GalenoCotizadorReq = {
     galenoLocalidad: number;
 };
 
+export type SancrisCotizadorReq = {
+    cotizadorReq: CotizadorReq;
+    clientDni: string;
+    clientTipoDoc: string;
+    provincia: number;
+    sancrisClausula: number;
+    sancrisCuotas: number;
+    sancrisDescuento: number;
+    sancrisForma_pago: string;
+    sancrisGnc: number;
+    sancrisGps: number;
+    sancrisPeriodo: string;
+    sancrisSaAcc: number;
+    sancrisTipoContratacion: string;
+    sancrisTipoDocumento: string;
+};
+
 export type AdminseSession = {
   accessToken?: string;
 };
@@ -247,7 +264,6 @@ export default class AdminseService {
         return responseBody;
     };
 
-
     static galenoCotizador = async (req: GalenoCotizadorReq): Promise<AllianzCotizadorRes> => {
 
         await this.login();
@@ -278,6 +294,58 @@ export default class AdminseService {
         url += `&galeno_rastreo=${req.galenoRastreo}`;
         url += `&galeno_recargo_administrativo=${req.galenoRecargoAdministrativo}`;
         url += `&galeno_localidad=${req.galenoLocalidad}`;
+
+        const headers = new Headers();
+        headers.set('Authorization', 'Bearer ' + session.accessToken);
+
+        const response = await fetch(url, {
+            headers: headers,
+        });
+
+        let responseBody;
+
+        // Prevent parsing errors when the response body is empty
+        try {
+            responseBody = await response.json()
+        } catch (error) {
+            responseBody = {};
+        }
+
+        return responseBody;
+    };
+
+    static sancrisCotizador = async (req: SancrisCotizadorReq): Promise<AllianzCotizadorRes> => {
+
+        await this.login();
+
+        let url = `https://cotizador-adminse.com.ar:9443/api/cotizador`;
+
+        url += `?`;
+        url += `infoauto_anio=${req.cotizadorReq.infoautoAnio}`;
+        url += `&infoauto_id=${req.cotizadorReq.infoautoId}`;
+        url += `&cia=${req.cotizadorReq.cia}`;
+        url += `&codigo_postal=${req.cotizadorReq.codigoPostal}`;
+        url += `&es_0km=${req.cotizadorReq.es0km}`;
+        url += `&fecha_nacimiento=${req.cotizadorReq.fechaNacimiento}`;
+        url += `&is_moto=${req.cotizadorReq.isMoto}`;
+        url += `&origen=${req.cotizadorReq.origen}`;
+        url += `&sexo=${req.cotizadorReq.sexo}`;
+        url += `&producer_profile_id=${req.cotizadorReq.producerProfileId}`;
+        url += `&producer_id=${req.cotizadorReq.producerId}`;
+
+        url += `&client_dni=${req.clientDni}`;
+        url += `&client_tipo_doc=${req.clientTipoDoc}`;
+        url += `&provincia=${req.provincia}`;
+        url += `&sancris_clausula=${req.sancrisClausula}`;
+        url += `&sancris_cuotas=${req.sancrisCuotas}`;
+        url += `&sancris_descuento=${req.sancrisDescuento}`;
+        url += `&sancris_forma_pago=${req.sancrisForma_pago}`;
+        url += `&sancris_gnc=${req.sancrisGnc}`;
+        url += `&sancris_gps=${req.sancrisGps}`;
+        url += `&sancris_periodo=${req.sancrisPeriodo}`;
+        url += `&sancris_sa_acc=${req.sancrisSaAcc}`;
+        url += `&sancris_tipo_contratacion=${req.sancrisTipoContratacion}`;
+        url += `&sancris_tipo_documento=${req.sancrisTipoDocumento}`;
 
         const headers = new Headers();
         headers.set('Authorization', 'Bearer ' + session.accessToken);

@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Form, useForm } from "react-hook-form";
 import { GetServerSideProps } from "next";
 import InfoAutoService from "@/api/InfoAutoService";
-import AdminseService, { AllianzCotizadorReq , GalenoCotizadorReq } from "@/api/AdminseService";
+import AdminseService, { AllianzCotizadorReq , GalenoCotizadorReq , SancrisCotizadorReq} from "@/api/AdminseService";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -23,10 +23,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
 //         console.log(provincias);
 //     });
 
-AdminseService.login()
-    .then((res) => {
-        console.log(res);
-    });
+// AdminseService.login()
+//     .then((res) => {
+//         console.log(res);
+//     });
 
 // const allianzCotizadorReq: AllianzCotizadorReq = {
 //     cotizadorReq : {
@@ -61,36 +61,72 @@ AdminseService.login()
 //         console.log(res);
 //     });
 
-const galenoCotizadorReq: GalenoCotizadorReq = {
+// const galenoCotizadorReq: GalenoCotizadorReq = {
+//     cotizadorReq : {
+//         infoautoAnio: 2023,
+//         infoautoId: 460862,
+//         cia: 'galeno',
+//         codigoPostal: '1120',
+//         es0km: 0,
+//         fechaNacimiento: '1990-01-01',
+//         isMoto: 0,
+//         origen: 'mata',
+//         sexo: 'MALE',
+//         producerProfileId: 9335,
+//         producerId: 882
+//     },
+//     galenoBonificacion: 0,
+//     galenoClausulaAjuste: 20,
+//     galenoGnc: 0,
+//     galenoGncValor: 0,
+//     galenoPlanComercial: "GALE",
+//     galenoModoFacturacion : "01",
+//     galenoCondicionPago : "001",
+//     galenoFormaPago : "4",
+//     galenoRastreo : 0,
+//     galenoRecargoAdministrativo : 0,
+//     galenoLocalidad : 1,
+// };
+// 
+// AdminseService.galenoCotizador(galenoCotizadorReq)
+//     .then((res) => {
+//         console.log(res);
+//         console.log(res.cotizaciones[0]);
+//     });
+
+const sancrisCotizadorReq: SancrisCotizadorReq = {
     cotizadorReq : {
         infoautoAnio: 2023,
         infoautoId: 460862,
-        cia: 'galeno',
+        cia: 'sancris',
         codigoPostal: '1120',
         es0km: 0,
         fechaNacimiento: '1990-01-01',
         isMoto: 0,
         origen: 'mata',
-        sexo: 'MALE',
-        producerProfileId: 9335,
+        sexo: 'FEMALE',
+        producerProfileId: 9771,
         producerId: 882
     },
-    galenoBonificacion: 0,
-    galenoClausulaAjuste: 20,
-    galenoGnc: 0,
-    galenoGncValor: 0,
-    galenoPlanComercial: "GALE",
-    galenoModoFacturacion : "01",
-    galenoCondicionPago : "001",
-    galenoFormaPago : "4",
-    galenoRastreo : 0,
-    galenoRecargoAdministrativo : 0,
-    galenoLocalidad : 1,
+    clientDni: "21013839",
+    clientTipoDoc: "dni",
+    provincia: 2,
+    sancrisClausula: 20,
+    sancrisCuotas: 6,
+    sancrisDescuento: 0,
+    sancrisForma_pago: 'creditcard',
+    sancrisGnc: 0,
+    sancrisGps: 0,
+    sancrisPeriodo: 'HalfYear',
+    sancrisSaAcc: 0,
+    sancrisTipoContratacion: 'CA7_Traditional',
+    sancrisTipoDocumento: 'Ext_DNI96',
 };
 
-AdminseService.galenoCotizador(galenoCotizadorReq)
+AdminseService.sancrisCotizador(sancrisCotizadorReq)
     .then((res) => {
         console.log(res);
+        console.log(res.cotizaciones[0]);
     });
 
 const Cotizador: React.FC = () => {

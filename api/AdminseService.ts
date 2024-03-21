@@ -137,7 +137,7 @@ export type GalenoCotizadorReq = {
     galenoPlanComercial: string;
     galenoModoFacturacion: string;
     galenoCondicionPago: string;
-    galenoFormaPago: number;
+    galenoFormaPago: string;
     galenoRastreo: number;
     galenoRecargoAdministrativo: number;
     galenoLocalidad: number;
@@ -156,7 +156,7 @@ export default class AdminseService {
         const response = await fetch(`https://cotizador-adminse.com.ar:9443/api/auth/login`,
         {
             headers: {
-                'Accept': 'application/json',
+                'Accept': '*/*',
                 'Content-Type': 'application/json'
             },
             method: "POST",
@@ -173,6 +173,8 @@ export default class AdminseService {
         }
 
         session.accessToken = responseBody.access_token;
+
+        return responseBody;
     };
 
     static getProvincias = async (
@@ -194,14 +196,14 @@ export default class AdminseService {
         return responseBody;
     };
 
-    static allianzCotizar = async (req: AllianzCotizadorReq): Promise<AllianzCotizadorRes> => {
+    static allianzCotizador = async (req: AllianzCotizadorReq): Promise<AllianzCotizadorRes> => {
 
-        this.login();
+        await this.login();
 
         let url = `https://cotizador-adminse.com.ar:9443/api/cotizador`;
 
         url += `?`;
-        url += `&infoauto_anio=${req.cotizadorReq.infoautoAnio}`;
+        url += `infoauto_anio=${req.cotizadorReq.infoautoAnio}`;
         url += `&infoauto_id=${req.cotizadorReq.infoautoId}`;
         url += `&cia=${req.cotizadorReq.cia}`;
         url += `&codigo_postal=${req.cotizadorReq.codigoPostal}`;
@@ -228,7 +230,6 @@ export default class AdminseService {
 
         const headers = new Headers();
         headers.set('Authorization', 'Bearer ' + session.accessToken);
-        console.log(session.accessToken);
 
         const response = await fetch(url, {
             headers: headers,
@@ -243,20 +244,18 @@ export default class AdminseService {
             responseBody = {};
         }
 
-        console.log(responseBody);
-
         return responseBody;
     };
 
 
     static galenoCotizador = async (req: GalenoCotizadorReq): Promise<AllianzCotizadorRes> => {
 
-        this.login();
+        await this.login();
 
         let url = `https://cotizador-adminse.com.ar:9443/api/cotizador`;
 
         url += `?`;
-        url += `&infoauto_anio=${req.cotizadorReq.infoautoAnio}`;
+        url += `infoauto_anio=${req.cotizadorReq.infoautoAnio}`;
         url += `&infoauto_id=${req.cotizadorReq.infoautoId}`;
         url += `&cia=${req.cotizadorReq.cia}`;
         url += `&codigo_postal=${req.cotizadorReq.codigoPostal}`;
@@ -282,7 +281,6 @@ export default class AdminseService {
 
         const headers = new Headers();
         headers.set('Authorization', 'Bearer ' + session.accessToken);
-        console.log(session.accessToken);
 
         const response = await fetch(url, {
             headers: headers,
@@ -296,8 +294,6 @@ export default class AdminseService {
         } catch (error) {
             responseBody = {};
         }
-
-        console.log(responseBody);
 
         return responseBody;
     };

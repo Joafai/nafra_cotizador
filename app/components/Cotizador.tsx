@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Form, useForm } from "react-hook-form";
 import { GetServerSideProps } from "next";
 import InfoAutoService from "@/api/InfoAutoService";
-import AdminseService, { AllianzCotizadorReq as AllianzCotizadorReq } from "@/api/AdminseService";
+import AdminseService, { AllianzCotizadorReq , GalenoCotizadorReq } from "@/api/AdminseService";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return { props: {} };
@@ -23,39 +23,72 @@ export const getServerSideProps: GetServerSideProps = async () => {
 //         console.log(provincias);
 //     });
 
-// AdminseService.login()
+AdminseService.login()
+    .then((res) => {
+        console.log(res);
+    });
+
+// const allianzCotizadorReq: AllianzCotizadorReq = {
+//     cotizadorReq : {
+//         infoautoAnio: 2023,
+//         infoautoId: 460862,
+//         cia: 'allianz',
+//         codigoPostal: '1120',
+//         es0km: 0,
+//         fechaNacimiento: '1990-01-01',
+//         isMoto: 0,
+//         origen: 'mata',
+//         sexo: 'MALE',
+//         producerProfileId: 7462,
+//         producerId: 882
+//     },
+//     allianzClausulaAjuste: 20,
+//     allianzGranizo: 1,
+//     allianzMediopago: 'T',
+//     allianzPeriodo: 'S',
+//     allianzTieneAlarma: 0,
+//     clientDni: '11111111',
+//     clientTipoDoc: 'dni',
+//     codigoCia: '0036',
+//     provincia: 2,
+//     sumaAsegurada: 0,
+//     tipoUso: 1,
+//     value: 'allianz',
+// };
+// 
+// AdminseService.allianzCotizador(allianzCotizadorReq)
 //     .then((res) => {
+//         console.log(res);
 //     });
 
-const allianzCotizadorReq: AllianzCotizadorReq = {
+const galenoCotizadorReq: GalenoCotizadorReq = {
     cotizadorReq : {
         infoautoAnio: 2023,
         infoautoId: 460862,
-        cia: 'allianz',
+        cia: 'galeno',
         codigoPostal: '1120',
         es0km: 0,
         fechaNacimiento: '1990-01-01',
         isMoto: 0,
         origen: 'mata',
         sexo: 'MALE',
-        producerProfileId: 7462,
+        producerProfileId: 9335,
         producerId: 882
     },
-    allianzClausulaAjuste: 20,
-    allianzGranizo: 1,
-    allianzMediopago: 'T',
-    allianzPeriodo: 'S',
-    allianzTieneAlarma: 0,
-    clientDni: '11111111',
-    clientTipoDoc: 'dni',
-    codigoCia: '0036',
-    provincia: 2,
-    sumaAsegurada: 0,
-    tipoUso: 1,
-    value: 'allianz',
+    galenoBonificacion: 0,
+    galenoClausulaAjuste: 20,
+    galenoGnc: 0,
+    galenoGncValor: 0,
+    galenoPlanComercial: "GALE",
+    galenoModoFacturacion : "01",
+    galenoCondicionPago : "001",
+    galenoFormaPago : "4",
+    galenoRastreo : 0,
+    galenoRecargoAdministrativo : 0,
+    galenoLocalidad : 1,
 };
 
-AdminseService.allianzCotizar(allianzCotizadorReq)
+AdminseService.galenoCotizador(galenoCotizadorReq)
     .then((res) => {
         console.log(res);
     });
